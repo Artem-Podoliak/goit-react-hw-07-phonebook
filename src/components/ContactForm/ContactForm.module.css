@@ -1,0 +1,63 @@
+.formWrapper {
+  margin-bottom: 20px;
+}
+
+.contactSubmitForm {
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #806128;
+  border-radius: 6px;
+  background-color: #a18c64;
+  border-radius: 8px;
+  box-shadow: 4px 4px 4px 0px rgba(130, 60, 43, 0.75);
+  -webkit-box-shadow: 4px 4px 4px 0px rgba(130, 60, 43, 0.75);
+  -moz-box-shadow: 4px 4px 4px 0px rgba(130, 60, 43, 0.75);
+}
+
+.formInputLabel {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 0px 20px;
+  font-size: 24px;
+  color: #e2d5cc;
+}
+
+.formInput {
+  width: 300px;
+  margin-top: 4px;
+  padding: 4px;
+  font-size: 16px;
+  border: 2px solid #806128;
+  border-radius: 6px;
+  background-color: #ad9a76;
+  transition: all 250ms ease-in-out;
+}
+.formInput:hover,
+.formInput:focus {
+  background-color: #caac73;
+  border-color: #d3c2b7;
+}
+
+.formSubmitBtn {
+  display: inline-block;
+  width: 160px;
+  height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-transform: uppercase;
+  background-color: #ad9a76;
+  border: 1px solid #806128;
+  border-radius: 4px;
+  color: #eeded3;
+  box-shadow: none;
+  transition: all 250ms ease-in-out;
+}
+.formSubmitBtn:hover,
+.formSubmitBtn:focus {
+  background-color: #caac73;
+  border-color: #d3c2b7;
+}
