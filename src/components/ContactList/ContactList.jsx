@@ -1,26 +1,37 @@
 import { useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getContactsItems, removeContact } from 'redux/contacts/slice';
+import { useSelector } from 'react-redux';
+
 import { getFilterValue } from 'redux/filter/slice';
+import { useGetAllContactsQuery } from './../../redux/services/phoneBookApi';
 import sortContactsByName from 'utils/sortContactsByName';
 import ContactItem from 'components/ContactItem';
 import css from './ContactList.module.css';
 
 export default function ContactList() {
-  const contacts = useSelector(getContactsItems);
-  const filterValue = useSelector(getFilterValue);
-  const dispatch = useDispatch();
+  const { data: contacts } = useGetAllContactsQuery();
 
-  const totalContactsAmount = contacts.length;
+  const filterValue = useSelector(getFilterValue);
+
+  const totalContactsAmount = () => {
+    if (!contacts) {
+      return 0;
+    }
+    return contacts.length;
+  };
 
   const getVisibleContacts = useMemo(
     () => () => {
+      if (!contacts) {
+        return;
+      }
+
       const normalizedFilter = filterValue.toLowerCase().trim();
+
       return contacts
         .filter(
           contact =>
             contact.name.toLowerCase().includes(normalizedFilter) ||
-            contact.number.includes(normalizedFilter)
+            contact.phone.includes(normalizedFilter)
         )
         .sort(sortContactsByName);
     },
@@ -28,10 +39,6 @@ export default function ContactList() {
   );
 
   const visibleContacts = getVisibleContacts();
-
-  const onDeleteContact = contactId => {
-    dispatch(removeContact(contactId));
-  };
 
   return totalContactsAmount > 0 ? (
     <>
@@ -41,13 +48,13 @@ export default function ContactList() {
       </p>
       <ul className={css.phonebookList}>
         {visibleContacts.length ? (
-          visibleContacts.map(({ id, name, number }) => (
+          visibleContacts.map(({ id, name, phone }) => (
             <li className={css.listElement} key={id}>
               <ContactItem
                 id={id}
                 name={name}
-                number={number}
-                onDelete={onDeleteContact}
+                phone={phone}
+                // onDelete={onDeleteContact}
               />
             </li>
           ))
