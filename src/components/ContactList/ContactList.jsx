@@ -2,17 +2,13 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getFilterValue } from 'redux/filter/slice';
-import {
-  useGetAllContactsQuery,
-  useDeleteContactMutation,
-} from './../../redux/services/phoneBookApi';
+import { useGetAllContactsQuery } from './../../redux/services/phoneBookApi';
 import sortContactsByName from 'utils/sortContactsByName';
 import ContactItem from 'components/ContactItem';
 import css from './ContactList.module.css';
 
 export default function ContactList() {
   const { data: contacts } = useGetAllContactsQuery();
-  // const onDeleteContact = useDeleteContactMutation();
 
   const filterValue = useSelector(getFilterValue);
 
