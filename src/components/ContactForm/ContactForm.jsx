@@ -36,22 +36,36 @@ export default function ContactForm() {
 
   const onContactFormSubmit = async evt => {
     evt.preventDefault();
-
-    if (
+    if (contacts !== undefined) {
+      console.log(contacts);
       contacts.find(
         contact =>
           contact.name.toLowerCase() === name.toLowerCase() &&
           contact.phone === phone
-      )
-    ) {
+      );
       showInfoMessage('This contact is already in your phonebook');
       return;
     }
-
-    if (contacts.find(contact => contact.phone === phone)) {
+    // if (
+    //   contacts.find(
+    //     contact =>
+    //       contact.name.toLowerCase() === name.toLowerCase() &&
+    //       contact.phone === phone
+    //   )
+    // ) {
+    //   showInfoMessage('This contact is already in your phonebook');
+    //   return;
+    // }
+    if (contacts !== undefined) {
+      contacts.find(contact => contact.phone === phone);
       showInfoMessage('This phone number is already in your phonebook');
       return;
     }
+
+    // if (contacts.find(contact => contact.phone === phone)) {
+    //   showInfoMessage('This phone number is already in your phonebook');
+    //   return;
+    // }
 
     const newContact = {
       name,
