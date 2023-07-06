@@ -7,7 +7,7 @@ export const phoneBookApi = createApi({
     baseUrl: 'https://64a6652f096b3f0fcc7fadd0.mockapi.io',
   }),
 
-  tegTypes: ['Contact'],
+  tagTypes: ['Contact'],
 
   endpoints: builder => ({
     getAllContacts: builder.query({

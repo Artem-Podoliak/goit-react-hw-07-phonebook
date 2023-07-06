@@ -2,13 +2,17 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getFilterValue } from 'redux/filter/slice';
-import { useGetAllContactsQuery } from './../../redux/services/phoneBookApi';
+import {
+  useGetAllContactsQuery,
+  useDeleteContactMutation,
+} from './../../redux/services/phoneBookApi';
 import sortContactsByName from 'utils/sortContactsByName';
 import ContactItem from 'components/ContactItem';
 import css from './ContactList.module.css';
 
 export default function ContactList() {
   const { data: contacts } = useGetAllContactsQuery();
+  // const onDeleteContact = useDeleteContactMutation();
 
   const filterValue = useSelector(getFilterValue);
 
@@ -40,11 +44,11 @@ export default function ContactList() {
 
   const visibleContacts = getVisibleContacts();
 
-  return totalContactsAmount > 0 ? (
+  return totalContactsAmount() > 0 ? (
     <>
       <p className={css.totalContactsText}>
         Contacts amount:{' '}
-        <span className={css.totalContactsNum}>{totalContactsAmount}</span>
+        <span className={css.totalContactsNum}>{totalContactsAmount()}</span>
       </p>
       <ul className={css.phonebookList}>
         {visibleContacts.length ? (
@@ -54,7 +58,7 @@ export default function ContactList() {
                 id={id}
                 name={name}
                 phone={phone}
-                // onDelete={onDeleteContact}
+                // onDelete={useDeleteContactMutation}
               />
             </li>
           ))
